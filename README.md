@@ -27,9 +27,6 @@ An open-source anti-detect browser with robust fingerprint injection built on Fi
 
 ---
 
-### Feature List
-ID: features
-
 # Camoufox Features
 
 ## Fingerprint Spoofing
