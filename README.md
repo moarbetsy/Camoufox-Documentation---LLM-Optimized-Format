@@ -1,8 +1,16 @@
-Generated: 2025-11-03T02:54:30.038Z
-
 # Camoufox Documentation - LLM Optimized Format
 
+Generated: 2025-11-03T02:54:30.038Z
+
+---
+
+
 ## Overview & Introduction
+
+### Introduction to Camoufox
+ID: intro
+
+# Camoufox Overview
 
 An open-source anti-detect browser with robust fingerprint injection built on Firefox.
 
@@ -26,6 +34,9 @@ An open-source anti-detect browser with robust fingerprint injection built on Fi
 4. More fingerprinting resistance research available
 
 ---
+
+### Feature List
+ID: features
 
 # Camoufox Features
 
@@ -678,3 +689,418 @@ All Playwright Page Agent JS is sandboxed and isolated.
 ⚠️ **No Chromium fingerprint injection** - Some WAFs test for Spidermonkey engine behavior
 
 ---
+
+
+## Legal & Disclaimer
+
+### Liability Disclaimer
+ID: disclaimer
+
+# Legal Information
+
+## Disclaimer
+Camoufox does NOT provide liability or warranty.
+
+No responsibility accepted for use of this software. Intended for **ethical and research purposes only**.
+
+Users use at their own risk. Developers cannot be held liable for damages. Software must not be used for malicious purposes.
+
+By using Camoufox, you agree to this disclaimer and acknowledge responsible use in compliance with all applicable laws.
+
+## Prohibited Uses
+Users agree NOT to:
+- Violate legal rights of others
+- Engage in illegal activity (CSAM, abuse, terrorism, violence)
+- Use for unlawful, invasive, infringing, defamatory, fraudulent purposes
+- Distribute viruses, malware, deceptive content
+- Gain unauthorized access or disrupt services
+- Generate spam or mass email
+- Access other services violating their ToS
+
+## Open Source Status
+Almost all code is public on GitHub. Some features (Canvas fingerprinting) are closed source to prevent reverse engineering by anti-bot providers.
+
+## Acceptable Use
+Software is for:
+- Security research
+- Testing bot detection systems
+- Privacy protection research
+- Educational purposes
+- Legitimate automation needs
+
+---
+
+Here is the GitHub repository data prepared for consumption by a Large Language Model, following the structured and cohesive approach outlined. The data has been extracted, cleaned, normalized, and organized into logical documents.
+
+***
+
+### **Document 1: Camoufox - Introduction and Core Concepts**
+
+**URL:** `https://camoufox.com`
+
+#### **Introduction**
+
+Camoufox is an open-source anti-detect browser with robust fingerprint injection. It is designed to provide a powerful, undetectable anti-fingerprinting solution that blends in with regular user traffic.
+
+**Important Notice:**
+> Hello! In March 2025, I had a medical emergency and have been hospitalized since. I haven't been able to continue my work for some time. I was previously updating Camoufox daily, and plan to return to that schedule as soon as I'm able. My goal is to have Camoufox back to its usual performance and be fully caught up by the end of 2025. Thank you for your patience and understanding.
+
+#### **Design and Implementation**
+
+*   **Fingerprinting Protection:** Privacy-focused browsers often make users more identifiable by creating unique fingerprints. Camoufox solves this by operating at a lower level, modifying device information in the C++ implementation instead of injecting JavaScript. Built on Firefox and research from the Tor project, LibreWolf, and Arkenfox, Camoufox aims to avoid common user identification methods.
+*   **Crowdblending:** Camoufox aims to blend in with real-world traffic. It uses BrowserForge to rotate device information (screen, OS, hardware) to mimic the statistical distribution of real-world device characteristics. It also uses a natural mouse movement algorithm.
+*   **Stealth:** Camoufox avoids bot detection by sandboxing and isolating all of Playwright's internal Page Agent Javascript from the main world, making it impossible for a page to detect its presence.
+
+#### **Why Firefox and not Chromium?**
+
+1.  **Open Source:** Chrome is closed source, making it harder to patch than Firefox. Anti-bot providers can detect the use of Chromium instead of Chrome.
+2.  **Detection Surface:** The Chrome DevTools Protocol (CDP) is more widely used and a more common target for bot detection. Juggler (used by Playwright with Firefox) operates at a lower level and is less prone to JS leaks.
+3.  **Fingerprinting Research:** More research exists for fingerprinting resistance on Firefox compared to Chromium.
+
+#### **Is Camoufox open source?**
+Almost all of Camoufox's code is publicly available on GitHub. However, certain features like the Canvas fingerprint rotation patch are closed source to prevent reverse engineering by anti-bot providers.
+
+***
+
+### **Document 2: Features and Stealth Performance**
+
+**URL:** `https://camoufox.com/features`, `https://camoufox.com/stealth`
+
+#### **Features List**
+
+*   **Fingerprint Spoofing:**
+    *   Navigator properties (device, browser, locale, etc.).
+    *   Screen size, resolution, etc.
+    *   WebGL parameters, extensions, context attributes, and shader precision formats.
+    *   CPU Canvas fingerprint via modified anti-aliasing logic (closed source).
+    *   Inner and outer window viewport sizes.
+    *   AudioContext sample rate, output latency, and max channel count.
+    *   Device voices & playback rates.
+    *   Number of microphones, webcams, and speakers.
+    *   Network headers (Accept-Languages, User-Agent).
+    *   WebRTC IP spoofing at the protocol level.
+    *   Geolocation, timezone, and locale spoofing.
+    *   Battery API spoofing.
+*   **Stealth Patches:**
+    *   Avoids main world execution leaks; all page agent javascript is sandboxed.
+    *   Fixes `navigator.webdriver` detection.
+    *   Fixes Firefox headless detection via pointer type.
+    *   Uses non-default screen & window sizes.
+*   **Human-like Cursor Movement:**
+    *   Built-in algorithm for natural cursor trajectories.
+*   **Anti Font Fingerprinting:**
+    *   Automatically uses correct system fonts for the target User Agent.
+    *   Bundled with Windows, Mac, and Linux system fonts.
+    *   Prevents font metrics fingerprinting by randomly offsetting letter spacing.
+*   **Debloat/Optimizations:**
+    *   Stripped out many Mozilla services for faster performance and lower memory usage (~200mb).
+    *   Includes patches from LibreWolf & Ghostery to remove telemetry.
+    *   Removed all CSS animations for speed.
+*   **Addons:**
+    *   Load Firefox addons via the Python interface.
+    *   Includes uBlock Origin with custom privacy filters by default.
+*   **Python Interface:**
+    *   Automatically generates & injects unique device characteristics based on real-world distribution.
+    *   Avoids proxy detection by matching geolocation, timezone, & locale to the proxy's region.
+    *   Remote server hosting support.
+    *   Built-in virtual display buffer for headless servers.
+
+#### **Stealth Performance**
+Camoufox performs well against major Web Application Firewalls (WAFs).
+
+| Test | Status | Notes |
+| :--- | :--- | :--- |
+| CreepJS | ✔️ | 71.5%. Successfully spoofs all OS predictions. |
+| Rebrowser Bot Detector | ✔️ | All tests pass. |
+| BrowserScan | ✔️ | 100%. Spoofs all geolocation & locale proxy detection. |
+| reCaptcha Score | ✔️ | 0.9 on demo sites. |
+| DataDome | ✔️ | All test sites pass. |
+| Imperva | ✔️ | Passes. |
+| Cloudflare | ✔️ | Passes Turnstile and Interstitial checks. |
+| WebRTC IP Spoofing | ✔️ | Spoofs Host & STUN IP correctly on Browserleaks, CreepJS, etc. |
+| Font Fingerprinting | ✔️ | Rotates all metrics on Browserleaks and CreepJS. |
+| Incolumitas | ✔️ | 0.8-1.0 score. |
+| SannySoft | ✔️ | Passes. |
+| Fingerprint.com | ✔️ | Passes. |
+
+***
+
+### **Document 3: Python Interface and Usage**
+
+**URL:** `https://camoufox.com/python`, `https://camoufox.com/python/installation`, `https://camoufox.com/python/usage`
+
+#### **Installation**
+1.  **Install the package:** The `geoip` extra is recommended for use with proxies.
+    ```bash
+    pip install -U "camoufox[geoip]"
+    ```
+2.  **Download the browser:**
+    ```bash
+    camoufox fetch
+    ```
+3.  **CLI Commands:**
+    *   `camoufox fetch`: Fetch the latest version of Camoufox.
+    *   `camoufox path`: Display the path to the Camoufox executable.
+    *   `camoufox remove`: Remove all downloaded files.
+    *   `camoufox server`: Launch a Playwright server.
+    *   `camoufox test`: Open the Playwright inspector.
+    *   `camoufox version`: Display the current version.
+
+#### **Basic Usage**
+Camoufox is a drop-in replacement for Playwright's browser initialization.
+
+**Sync API**
+```python
+from camoufox.sync_api import Camoufox
+
+with Camoufox() as browser:
+    page = browser.new_page()
+    page.goto("https://example.com")
+```
+**Async API** is also available.
+
+#### **Parameters List**
+All Playwright Firefox launch options are accepted, along with Camoufox-specific options:
+
+*   **Device Rotation**
+    *   `os: Optional[ListOrString]`: "windows", "macos", "linux", or a list to choose from.
+    *   `screen: Optional[Screen]`: Constrain screen dimensions using a `browserforge.fingerprints.Screen` instance.
+    *   `webgl_config: Optional[Tuple[str, str]]`: Use a specific WebGL vendor/renderer pair, e.g., `("Apple", "Apple M1, or similar")`.
+*   **Configuration**
+    *   `humanize: Optional[Union[bool, float]]`: Enable human-like cursor movement. Set to `True` or a max duration in seconds.
+    *   `headless: Optional[Union[bool, Literal['virtual']]]`: Run headless. Use `'virtual'` on Linux for an Xvfb virtual display.
+    *   `addons: Optional[List[str]]`: List of paths to extracted Firefox addons.
+    *   `window: Optional[Tuple[int, int]]`: Set a fixed window size `(width, height)`. (Not recommended for production).
+    *   `main_world_eval: Optional[bool]`: Enable script injection into the main world.
+*   **Location & Language**
+    *   `geoip: Optional[Union[str, bool]]`: Set to `True` to auto-detect IP or provide a specific IP to match geolocation, timezone, and locale.
+    *   `locale: Optional[Union[str, List[str]]]`: Set a specific locale, e.g., `"en-US"`.
+*   **Toggles**
+    *   `block_images: Optional[bool]`: Block image requests.
+    *   `block_webrtc: Optional[bool]`: Block WebRTC.
+    *   `block_webgl: Optional[bool]`: Block WebGL.
+    *   `disable_coop: Optional[bool]`: Disable Cross-Origin-Opener-Policy, useful for clicking elements in cross-origin iframes like Cloudflare Turnstile.
+*   **Advanced**
+    *   `config: Optional[Dict[str, Any]]`: Manually override individual Camoufox config properties.
+
+***
+
+### **Document 4: Advanced Python Features**
+
+**URL:** `https://camoufox.com/python/geoip`, `https://camoufox.com/python/browserforge`, `https://camoufox.com/python/remote-server`, `https://camoufox.com/python/virtual-display`, `https://camoufox.com/python/main-world-eval`
+
+#### **GeoIP & Proxy Support**
+By passing `geoip=True` or a target IP address, Camoufox automatically spoofs longitude, latitude, timezone, country, locale, and the WebRTC IP address to match the IP's location. It also spoofs the browser's language based on regional language distribution.
+
+**Usage:**
+```python
+with Camoufox(
+    geoip=True,
+    proxy={
+        'server': 'http://example.com:8080',
+        'username': 'username',
+        'password': 'password'
+    }
+) as browser:
+    page = browser.new_page()
+    page.goto("https://www.browserscan.net")
+```
+
+#### **BrowserForge Integration**
+Camoufox uses BrowserForge to generate fingerprints. By default, it generates a random fingerprint matching the specified `os` and `screen` constraints.
+```python
+from camoufox.sync_api import Camoufox
+from browserforge.fingerprints import Screen
+
+with Camoufox(
+    os=('windows', 'macos', 'linux'),
+    screen=Screen(max_width=1920, max_height=1080),
+) as browser:
+    page = browser.new_page()
+```
+
+#### **Remote Server**
+Camoufox can run as a remote WebSocket server, allowing connection from other languages that support Playwright.
+
+**Launch Server:**
+```bash
+python -m camoufox server
+```
+Or configure programmatically:
+```python
+from camoufox.server import launch_server
+launch_server(port=1234, ws_path='hello')
+```
+**Connect to Server:**
+```python
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+    browser = p.firefox.connect('ws://localhost:1234/hello')
+    page = browser.new_page()
+```
+
+#### **Virtual Display (Linux)**
+To run Camoufox headfully on a headless Linux server, install `xvfb` and use `headless="virtual"`.
+```bash
+# Debian-based
+sudo apt-get install xvfb
+```
+```python
+from camoufox.sync_api import Camoufox
+
+with Camoufox(headless="virtual") as browser:
+    page = browser.new_page()
+```
+
+#### **Main World Execution**
+By default, `page.evaluate()` runs in an isolated world and cannot modify the DOM. To modify the DOM, enable main world execution and prefix your script with `mw:`. **Warning:** This can be detected by the target website.
+
+```python
+with Camoufox(main_world_eval=True) as browser:
+    page = browser.new_page()
+    page.goto("https://example.com")
+    # This will remove the h1 element
+    page.evaluate("mw:document.querySelector('h1').remove()")
+```
+
+***
+
+### **Document 5: Fingerprinting Protection Details**
+
+**URL:** `https://camoufox.com/fingerprint/*`
+
+#### **General Approach (Fingerprint Injection)**
+Data is intercepted at the C++ implementation level, making changes undetectable through JavaScript inspection. Config data not set by the user is automatically populated using BrowserForge fingerprints to mimic real-world traffic.
+
+#### **Canvas**
+Instead of adding detectable noise, Camoufox uses a patched build of Skia with modified subpixel rendering logic. This makes it impossible to distinguish from a device that naturally renders anti-aliasing differently. This patch is closed-source.
+*   `canvas:aaOffset`: Offset each pixel's transparency when drawing anti-aliasing.
+
+#### **Cursor Movement**
+Camoufox has built-in support for human-like cursor movement, rewritten in C++ from rifosnake's HumanCursor algorithm.
+*   `humanize`: (boolean) Enable/disable human-like cursor movement.
+*   `showcursor`: (boolean) Toggles a cursor highlighter for debugging (not visible to the page).
+
+#### **Fonts**
+Camoufox prevents font fingerprinting by:
+1.  Bundling default fonts for Windows 11, macOS Sonoma, and Linux (TOR bundle).
+2.  Automatically loading the correct default fonts for the spoofed User-Agent OS.
+3.  Allowing custom fonts to be loaded via the `fonts` parameter.
+4.  Randomly shifting the spacing of each letter by 0-0.1px to defeat font metrics fingerprinting.
+
+#### **Geolocation & Intl**
+Spoofs location, timezone, and internationalization APIs.
+*   `geolocation:latitude`, `geolocation:longitude`: Sets GPS coordinates.
+*   `timezone`: Sets a TZ timezone identifier (e.g., "America/Chicago").
+*   `locale:language`, `locale:region`: Spoofs the Intl API and system language/region.
+
+#### **Media & Audio**
+*   **Media Devices**: Spoofs the number of microphones, webcams, and speakers.
+*   **AudioContext**: Spoofs `sampleRate`, `outputLatency`, and `maxChannelCount`.
+
+#### **Navigator**
+All navigator properties can be fully spoofed. `navigator.webdriver` is always `false`.
+*   Includes `userAgent`, `platform`, `hardwareConcurrency`, `language`, `doNotTrack`, etc.
+
+#### **Screen & Window**
+*   **Screen**: Spoofs `screen.width`, `screen.height`, `screen.availWidth`, `screen.colorDepth`, etc.
+*   **Window**: Spoofs `window.innerWidth`, `window.outerWidth`, `window.devicePixelRatio`, `window.history.length`, etc.
+
+#### **WebGL**
+Supports spoofing of all major WebGL properties. **Warning:** Do not randomly assign values, as this will lead to detection as an unknown device.
+*   `webGl:renderer`: Name of the unmasked WebGL renderer.
+*   `webGl:vendor`: Name of the unmasked WebGL vendor.
+*   `webGl:supportedExtensions`: An array of supported WebGL extensions.
+*   `webGl:contextAttributes`: A dictionary of WebGL context attributes.
+*   `webGl:parameters`: A dictionary of WebGL parameters (keyed by GL enums).
+*   `webGl:shaderPrecisionFormats`: A dictionary of WebGL shader precision formats.
+*   *Equivalent properties exist for `webGl2`.*
+
+#### **WebRTC IP**
+Implements WebRTC IP spoofing at the protocol level by modifying ICE candidates and SDP.
+*   `webrtc:ipv4`: IPv4 address to use.
+*   `webrtc:ipv6`: IPv6 address to use.
+
+***
+
+### **Document 6: Development and Building**
+
+**URL:** `https://camoufox.com/development/*`
+
+#### **Build System Overview**
+Camoufox's build system is based on the LibreWolf system. It applies fingerprint masking patches, addons, debloat optimizations, and fonts to the Firefox source code to produce portable builds for Linux, Windows, and macOS.
+
+#### **Building in CLI (Linux Only)**
+**Warning:** The build system is designed for Linux. WSL will not work.
+
+1.  **Clone the repository:**
+    ```bash
+    git clone --depth 1 https://github.com/daijro/camoufox
+    cd camoufox
+    ```
+2.  **Prepare source code:**
+    ```bash
+    make dir
+    ```
+3.  **Bootstrap the system (one-time setup):**
+    ```bash
+    make bootstrap
+    ```
+4.  **Build and package:**
+    ```bash
+    python3 multibuild.py --target linux windows macos --arch x86_64 arm64 i686
+    ```
+
+#### **Building in Docker (for non-Linux systems)**
+1.  **Create the Docker image:**
+    ```bash
+    docker build -t camoufox-builder .
+    ```
+2.  **Build Camoufox:**
+    ```bash
+    docker run -v "$(pwd)/dist:/app/dist" camoufox-builder --target <os> --arch <arch>
+    ```
+    To use the host's `.mozbuild` directory for caching:
+    ```bash
+    docker run \
+      -v "$HOME/.mozbuild:/root/.mozbuild:rw,z" \
+      -v "$(pwd)/dist:/app/dist" \
+      camoufox-builder \
+      --target <os> \
+      --arch <arch>
+    ```
+
+#### **Development Tools & Workflow**
+A developer UI is available via `scripts/developer.py` (`make edits`) to manage, create, and edit patches.
+
+The `workflow` page provides a detailed flowchart for debugging why a website is flagging the browser. The process involves systematically testing a clean Firefox build, then adding layers (headless mode, patches, configs) to isolate the cause of detection. If all else fails, the final step is to deobfuscate the website's JavaScript to understand its detection methods.
+
+**Key Debugging Commands:**
+*   `make ff-dbg`: Setup vanilla Firefox with minimal patches.
+*   `make build`: Build the source code.
+*   `make run`: Run the built browser.
+*   `make run args="--headless https://test.com"`: Run in headless mode.
+*   `make edits`: Open the developer UI to manage patches.
+*   `make edit-cfg`: Edit `camoufox.cfg`.
+
+***
+
+### **Document 7: Testing, Research, and Legal**
+
+**URL:** `https://camoufox.com/tests/*`, `https://camoufox.com/webgl-research`, `https://camoufox.com/legal`
+
+#### **WebGL Research**
+Camoufox maintains a database of WebGL vendor and renderer combinations seen in Firefox on different operating systems. This data is used to ensure that generated WebGL fingerprints correspond to real-world hardware combinations, avoiding detection. The research page lists common combinations and marks whether sufficient data has been collected for accurate simulation.
+
+#### **Test Pages**
+Camoufox provides several pages for testing browser fingerprints:
+*   **WebGL Test (`/tests/webgl`):** Displays your browser's complete WebGL fingerprint in a JSON format compatible with Camoufox's configuration.
+*   **Canvas Tests (`/tests/canvas`):** A comprehensive suite that runs multiple tests (text rendering, shapes, gradients, shadows) to generate canvas hashes and check for randomization.
+*   **Low-Entropy Canvas Test (`/tests/private/canvas-low-entropy`):** A specific test to check for known rendering engine results.
+*   **Shadow DOM Test (`/tests/shadowdom`):** A demo page for testing clicks on elements inside a shadow DOM.
+*   **Button Click Test (`/tests/buttonclick`):** A simple page with a button for click testing.
+
+#### **Legal & Donation**
+*   **Liability Disclaimer:** Camoufox is provided without warranty and is intended for ethical and research purposes only. Users are responsible for complying with all applicable laws. The acceptable use policy prohibits illegal, malicious, or fraudulent activities.
+*   **Donate:** The project is maintained by an independent student researcher and accepts donations to support development and tuition.
